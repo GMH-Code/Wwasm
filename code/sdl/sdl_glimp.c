@@ -849,6 +849,13 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 	glstring = (char *) qglGetString (GL_RENDERER);
 	ri.Printf( PRINT_ALL, "GL_RENDERER: %s\n", glstring );
 
+#ifdef __EMSCRIPTEN__
+	// For WebAssembly, set relative mouse mode for the lifetime of the window
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetWindowGrab(SDL_window, SDL_TRUE);
+	wasm_capture_mouse();
+#endif
+
 	return RSERR_OK;
 }
 

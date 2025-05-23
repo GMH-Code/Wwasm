@@ -776,7 +776,6 @@ int main_init( int argc, char **argv )
 
 #ifdef __EMSCRIPTEN__
 	wasm_hide_console();
-	wasm_capture_mouse();
 
 	// Com_Frame() takes and returns no args, so no need to wrap it
 	emscripten_set_main_loop(Com_Frame, 0, 0);
